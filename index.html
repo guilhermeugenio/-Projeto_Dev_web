@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Meu quadro Kanban</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">ORGANIZE SEU DIA</p>
+        <h1>Meu quadro <span>Kanban</span></h1>
+        <p class="subtitle">Um passo de cada vez. Seu progresso, sempre à vista.</p>
+      </div>
+      <button class="theme-button" id="theme-toggle" type="button" aria-pressed="false">
+        <span aria-hidden="true">☾</span>
+        <span class="theme-label">Modo escuro</span>
+      </button>
+    </header>
+
+    <p id="aviso" class="notice" role="status" aria-live="polite"></p>
+
+    <!-- As colunas são geradas pelo JavaScript a partir dos dados salvos. -->
+    <section class="board" id="board" aria-label="Quadro de atividades"></section>
+    <button class="new-column-button" id="add-column" type="button">＋ Criar nova coluna</button>
+
+    <footer class="page-footer">As alterações são salvas automaticamente neste dispositivo.</footer>
+  </main>
+
+  <!-- Formulário modal compartilhado para adicionar e editar atividades. -->
+  <dialog class="task-dialog" id="task-dialog" aria-labelledby="dialog-title">
+    <form id="task-form">
+      <h2 id="dialog-title">Nova atividade</h2>
+      <label for="task-title">Título da atividade</label>
+      <input id="task-title" name="title" type="text" maxlength="160" required autocomplete="off">
+      <label for="task-priority">Prioridade</label>
+      <select id="task-priority" name="priority">
+        <option value="low">Baixa</option>
+        <option value="medium" selected>Média</option>
+        <option value="high">Alta</option>
+      </select>
+      <p class="form-error" id="form-error" aria-live="polite"></p>
+      <div class="dialog-actions">
+        <button class="cancel-button" id="cancel-dialog" type="button">Cancelar</button>
+        <button class="save-button" type="submit">Salvar atividade</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="task-dialog" id="column-dialog" aria-labelledby="column-dialog-title">
+    <form id="column-form">
+      <h2 id="column-dialog-title">Nova coluna</h2>
+      <label for="column-title">Nome da coluna</label>
+      <input id="column-title" name="title" type="text" maxlength="50" required autocomplete="off">
+      <p class="form-error" id="column-error" aria-live="polite"></p>
+      <div class="dialog-actions">
+        <button class="cancel-button" id="cancel-column" type="button">Cancelar</button>
+        <button class="save-button" type="submit">Criar coluna</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
